@@ -1,11 +1,1896 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One Question For You ❤️</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700&family=Pacifico&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --pink:#ff3d86;
+    --pink2:#ff75ae;
+    --purple:#9b5cff;
+    --white:#fff;
+}
+
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+
+body{
+    font-family:Inter,sans-serif;
+    background:
+        radial-gradient(circle at 20% 20%,#5b103d 0,transparent 32%),
+        radial-gradient(circle at 80% 80%,#35105e 0,transparent 35%),
+        #08030b;
+    color:white;
+}
+
+/* ================= BACKGROUND ================= */
+
+.background{
+    position:fixed;
+    inset:0;
+    z-index:-10;
+}
+
+.glow{
+    position:absolute;
+    width:500px;
+    height:500px;
+    border-radius:50%;
+    filter:blur(100px);
+    opacity:.25;
+}
+
+.glow.one{
+    background:#ff207c;
+    left:-200px;
+    top:-150px;
+}
+
+.glow.two{
+    background:#8b3dff;
+    right:-200px;
+    bottom:-150px;
+}
+
+/* ================= STARS ================= */
+
+#stars{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+}
+
+.star{
+    position:absolute;
+    width:2px;
+    height:2px;
+    background:white;
+    border-radius:50%;
+    animation:twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+    from{
+        opacity:.15;
+        transform:scale(.5);
+    }
+    to{
+        opacity:1;
+        transform:scale(1.5);
+    }
+}
+
+/* ================= HEARTS ================= */
+
+#hearts,
+#petals{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:5;
+}
+
+.heart{
+    position:absolute;
+    bottom:-60px;
+    animation:floatHeart linear forwards;
+    filter:drop-shadow(0 0 10px #ff3d86);
+}
+
+@keyframes floatHeart{
+    0%{
+        opacity:0;
+        transform:translateY(0) scale(.5) rotate(0);
+    }
+
+    10%{
+        opacity:.8;
+    }
+
+    100%{
+        opacity:0;
+        transform:
+            translateY(-115vh)
+            translateX(var(--x))
+            scale(1.3)
+            rotate(360deg);
+    }
+}
+
+.petal{
+    position:absolute;
+    top:-50px;
+    animation:fallPetal linear forwards;
+}
+
+@keyframes fallPetal{
+    0%{
+        opacity:0;
+        transform:translateY(0) rotate(0);
+    }
+
+    10%{
+        opacity:1;
+    }
+
+    100%{
+        opacity:0;
+        transform:
+            translateY(115vh)
+            translateX(150px)
+            rotate(720deg);
+    }
+}
+
+/* ================= APP ================= */
+
+.app{
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.card{
+    width:min(950px,94vw);
+    min-height:620px;
+    max-height:90vh;
+    position:relative;
+    overflow:hidden;
+
+    border:1px solid #ffffff20;
+    border-radius:35px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff10,
+            #ffffff03
+        );
+
+    backdrop-filter:blur(25px);
+
+    box-shadow:
+        0 40px 100px #000,
+        0 0 80px #ff246622;
+
+    animation:cardIn .7s ease;
+}
+
+@keyframes cardIn{
+    from{
+        opacity:0;
+        transform:scale(.93) translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1) translateY(0);
+    }
+}
+
+/* ================= TOP ================= */
+
+.top{
+    position:absolute;
+    top:22px;
+    left:30px;
+    right:30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    z-index:10;
+}
+
+.logo{
+    font-size:10px;
+    letter-spacing:4px;
+    color:#ff9fc5;
+}
+
+.counter{
+    font-size:11px;
+    letter-spacing:2px;
+    color:#ffffff55;
+}
+
+/* ================= PROGRESS ================= */
+
+.progress{
+    position:absolute;
+    top:55px;
+    left:30px;
+    right:30px;
+    height:2px;
+    background:#ffffff12;
+    z-index:10;
+}
+
+.progressBar{
+    height:100%;
+    width:0%;
+    background:linear-gradient(
+        90deg,
+        var(--pink),
+        var(--purple)
+    );
+    box-shadow:0 0 15px var(--pink);
+    transition:.6s;
+}
+
+/* ================= CONTENT ================= */
+
+.content{
+    min-height:620px;
+    padding:100px 70px 50px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+.emoji{
+    font-size:80px;
+    margin-bottom:20px;
+    animation:pulse 1.7s infinite;
+    filter:drop-shadow(0 0 25px #ff3d86);
+}
+
+@keyframes pulse{
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.13);
+    }
+}
+
+.small{
+    font-size:11px;
+    letter-spacing:5px;
+    color:#ff91bb;
+    text-transform:uppercase;
+    margin-bottom:20px;
+}
+
+h1{
+    font-family:"Cormorant Garamond",serif;
+    font-size:clamp(45px,7vw,82px);
+    line-height:.95;
+    margin-bottom:25px;
+}
+
+h2{
+    font-family:"Cormorant Garamond",serif;
+    font-size:clamp(35px,5vw,60px);
+    line-height:1;
+    margin-bottom:22px;
+}
+
+.script{
+    font-family:Pacifico,cursive;
+    color:#ff4f96;
+    text-shadow:0 0 25px #ff277766;
+}
+
+.text{
+    max-width:650px;
+    color:#ffffffaa;
+    font-size:16px;
+    line-height:1.9;
+}
+
+.name{
+    color:#ff76ac;
+}
+
+/* ================= START ================= */
+
+.start{
+    position:absolute;
+    inset:0;
+    z-index:50;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #3c092aaa,
+            #08030bee 65%
+        );
+}
+
+.startContent{
+    max-width:650px;
+    padding:30px;
+}
+
+.startHeart{
+    font-size:95px;
+    animation:pulse 1.4s infinite;
+}
+
+.startTitle{
+    font-family:"Cormorant Garamond",serif;
+    font-size:clamp(55px,9vw,100px);
+    margin:15px 0;
+}
+
+.startText{
+    color:#ffffff88;
+    line-height:1.8;
+}
+
+.nameInput{
+    margin-top:25px;
+    width:270px;
+    padding:15px 20px;
+
+    border-radius:30px;
+    border:1px solid #ffffff25;
+
+    background:#ffffff0b;
+    color:white;
+
+    outline:none;
+    text-align:center;
+}
+
+.nameInput::placeholder{
+    color:#ffffff44;
+}
+
+.mainBtn{
+    margin-top:25px;
+    padding:16px 35px;
+
+    border:none;
+    border-radius:40px;
+
+    color:white;
+    background:
+        linear-gradient(
+            90deg,
+            var(--pink),
+            var(--purple)
+        );
+
+    font-weight:700;
+    letter-spacing:2px;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 0 35px #ff3d8655;
+
+    transition:.3s;
+}
+
+.mainBtn:hover{
+    transform:translateY(-4px) scale(1.04);
+    box-shadow:
+        0 0 60px #ff3d8688;
+}
+
+/* ================= PHOTO ================= */
+
+.photo{
+    width:160px;
+    height:160px;
+
+    border-radius:50%;
+    padding:5px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff3d86,
+            #a45cff,
+            #ff3d86
+        );
+
+    box-shadow:
+        0 0 40px #ff3d8655;
+
+    margin-bottom:25px;
+}
+
+.photo img{
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+.upload{
+    margin-bottom:20px;
+}
+
+.upload label{
+    padding:10px 15px;
+    border-radius:25px;
+    border:1px solid #ffffff22;
+    background:#ffffff09;
+    color:#ffffff88;
+    font-size:11px;
+    cursor:pointer;
+}
+
+.upload input{
+    display:none;
+}
+
+/* ================= YES NO ================= */
+
+.buttons{
+    margin-top:35px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+    min-height:65px;
+}
+
+.btn{
+    padding:16px 35px;
+    border-radius:50px;
+    font-size:15px;
+    font-weight:700;
+    border:none;
+    cursor:pointer;
+}
+
+.yes{
+    color:white;
+    background:
+        linear-gradient(
+            90deg,
+            #ff2677,
+            #ff5c9b
+        );
+
+    box-shadow:
+        0 0 35px #ff267766;
+
+    transition:.3s;
+}
+
+.yes:hover{
+    transform:scale(1.08);
+}
+
+.no{
+    color:#ffffffaa;
+    background:#ffffff08;
+    border:1px solid #ffffff25;
+
+    position:relative;
+
+    transition:
+        left .15s ease,
+        top .15s ease,
+        transform .15s ease;
+}
+
+/* ================= TRUE FALSE ================= */
+
+.tfButtons{
+    margin-top:35px;
+    display:flex;
+    justify-content:center;
+    gap:20px;
+}
+
+.trueBtn,
+.falseBtn{
+    min-width:150px;
+    padding:16px 30px;
+
+    border-radius:50px;
+
+    color:white;
+
+    border:1px solid #ffffff20;
+
+    background:#ffffff09;
+
+    cursor:pointer;
+
+    font-weight:700;
+
+    transition:.3s;
+}
+
+.trueBtn:hover,
+.falseBtn:hover{
+    transform:translateY(-4px);
+    background:#ffffff15;
+}
+
+.feedback{
+    height:30px;
+    margin-top:20px;
+    color:#ff85b2;
+    font-size:14px;
+}
+
+/* ================= FINAL ================= */
+
+.finalHeart{
+    font-size:110px;
+    animation:pulse 1.2s infinite;
+}
+
+.finalText{
+    max-width:680px;
+    color:#ffffffaa;
+    line-height:1.9;
+}
+
+.forever{
+    margin-top:30px;
+    font-family:Pacifico,cursive;
+    color:#ff73a9;
+    font-size:28px;
+    text-shadow:0 0 20px #ff3d8666;
+}
+
+/* ================= MUSIC ================= */
+
+.music{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    z-index:100;
+
+    padding:12px 18px;
+
+    border-radius:30px;
+
+    border:1px solid #ffffff20;
+    background:#ffffff0b;
+
+    backdrop-filter:blur(15px);
+
+    color:white;
+
+    cursor:pointer;
+
+    font-size:11px;
+}
+
+.musicDot{
+    display:inline-block;
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#ff4f96;
+    margin-right:6px;
+    box-shadow:0 0 10px #ff4f96;
+}
+
+/* ================= FIREWORK ================= */
+
+.fire{
+    position:fixed;
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:white;
+    pointer-events:none;
+    z-index:200;
+
+    animation:explode 1.5s ease-out forwards;
+}
+
+@keyframes explode{
+    to{
+        transform:
+            translate(
+                var(--x),
+                var(--y)
+            );
+        opacity:0;
+    }
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:700px){
+
+    .card{
+        min-height:90vh;
+        max-height:92vh;
+        overflow-y:auto;
+    }
+
+    .content{
+        min-height:85vh;
+        padding:90px 25px 45px;
+    }
+
+    .emoji{
+        font-size:65px;
+    }
+
+    .photo{
+        width:130px;
+        height:130px;
+    }
+
+    .buttons{
+        flex-wrap:wrap;
+    }
+
+    .tfButtons{
+        flex-direction:column;
+    }
+
+    .trueBtn,
+    .falseBtn{
+        width:220px;
+    }
+
+    .music{
+        bottom:10px;
+        right:10px;
+    }
+}
+</style>
 </head>
+
 <body>
-    <h2>Welcome to html class</h2>
+
+<div class="background">
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+</div>
+
+<div id="stars"></div>
+<div id="hearts"></div>
+<div id="petals"></div>
+
+
+<div class="app">
+
+<div class="card" id="card">
+
+    <div class="top">
+        <div class="logo">
+            JUST FOR YOU ❤️
+        </div>
+
+        <div class="counter" id="counter">
+            00 / 09
+        </div>
+    </div>
+
+    <div class="progress">
+        <div
+            class="progressBar"
+            id="progressBar"
+        ></div>
+    </div>
+
+
+    <!-- START -->
+
+    <div class="start" id="start">
+
+        <div class="startContent">
+
+            <div class="startHeart">
+                💌
+            </div>
+
+            <div class="small">
+                A LITTLE SECRET
+            </div>
+
+            <div class="startTitle">
+                One Question...
+            </div>
+
+            <div class="startText">
+
+                I created this little experience
+                for someone who is a little more
+                special than they probably realize.
+
+                <br><br>
+
+                Enter your name and
+                let's begin. ❤️
+
+            </div>
+
+            <input
+                class="nameInput"
+                id="nameInput"
+                placeholder="Enter your name..."
+            >
+
+            <br>
+
+            <button
+                class="mainBtn"
+                onclick="startExperience()"
+            >
+                OPEN THE SURPRISE ✨
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<button
+    class="music"
+    id="musicButton"
+>
+    <span class="musicDot"></span>
+    MUSIC OFF
+</button>
+
+
+<script>
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+let name = "Beautiful";
+
+let page = 0;
+
+let running = false;
+
+let customPhoto = "";
+
+
+/* =====================================================
+   DEFAULT LOVE PHOTO
+===================================================== */
+
+const defaultPhoto =
+"https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=700&q=85";
+
+
+/* =====================================================
+   QUESTIONS
+===================================================== */
+
+const pages = [
+
+{
+    type:"intro",
+
+    emoji:"🌸",
+
+    title:"So, <span class='script'>{name}</span>...",
+
+    text:
+    "Before I say what I really want to say, I have a few tiny questions for you. Be honest. 😌"
+},
+
+{
+    type:"yesno",
+
+    emoji:"😊",
+
+    title:"Do you like surprises?",
+
+    text:
+    "Because I spent quite a bit of time making this one for you.",
+
+    yes:"YES ❤️",
+    no:"NO 😐"
+},
+
+{
+    type:"truefalse",
+
+    emoji:"🦋",
+
+    title:"TRUE or FALSE?",
+
+    text:
+    "A smile from the right person can make your entire day better.",
+
+    trueText:"TRUE 💕",
+    falseText:"FALSE 🙃",
+
+    correct:true
+},
+
+{
+    type:"yesno",
+
+    emoji:"👀",
+
+    title:"Have you ever smiled because of me?",
+
+    text:
+    "Think carefully... I have a feeling I already know the answer.",
+
+    yes:"YES 😳",
+    no:"NO 😭"
+},
+
+{
+    type:"truefalse",
+
+    emoji:"💭",
+
+    title:"TRUE or FALSE?",
+
+    text:
+    "Sometimes the person you least expected can become the person you think about the most.",
+
+    trueText:"TRUE ❤️",
+    falseText:"FALSE 🤨",
+
+    correct:true
+},
+
+{
+    type:"yesno",
+
+    emoji:"🌹",
+
+    title:"Would you give me a chance?",
+
+    text:
+    "Not a promise. Not anything complicated. Just a chance to know each other a little better.",
+
+    yes:"YES 🌹",
+    no:"NO 🙈"
+},
+
+{
+    type:"truefalse",
+
+    emoji:"💗",
+
+    title:"TRUE or FALSE?",
+
+    text:
+    "If someone makes you feel happy, comfortable and special... they are worth keeping around.",
+
+    trueText:"TRUE 💖",
+    falseText:"FALSE 😶",
+
+    correct:true
+},
+
+{
+    type:"yesno",
+
+    emoji:"❤️",
+
+    title:"One last thing...",
+
+    text:
+    "Would you like to hear what my heart has been trying to tell you?",
+
+    yes:"YES, TELL ME ❤️",
+    no:"NO 😭"
+},
+
+{
+    type:"proposal"
+}
+
+];
+
+
+/* =====================================================
+   START
+===================================================== */
+
+function startExperience(){
+
+    const input =
+        document.getElementById("nameInput");
+
+    if(input.value.trim()){
+
+        name =
+            input.value.trim();
+
+    }
+
+    running=true;
+
+    document.getElementById(
+        "start"
+    ).style.display="none";
+
+    startMusic();
+
+    page=0;
+
+    showPage();
+
+}
+
+
+/* =====================================================
+   SHOW PAGE
+===================================================== */
+
+function showPage(){
+
+    if(page >= pages.length){
+
+        finalPage();
+
+        return;
+    }
+
+    const data =
+        pages[page];
+
+    document.getElementById(
+        "counter"
+    ).innerText =
+        String(page+1).padStart(2,"0")
+        +" / "
+        +String(pages.length).padStart(2,"0");
+
+    document.getElementById(
+        "progressBar"
+    ).style.width =
+        ((page+1)/pages.length*100)
+        +"%";
+
+
+    if(data.type==="intro"){
+
+        renderIntro(data);
+
+    }
+
+    else if(data.type==="yesno"){
+
+        renderYesNo(data);
+
+    }
+
+    else if(data.type==="truefalse"){
+
+        renderTrueFalse(data);
+
+    }
+
+    else if(data.type==="proposal"){
+
+        renderProposal();
+
+    }
+
+}
+
+
+/* =====================================================
+   INTRO
+===================================================== */
+
+function renderIntro(data){
+
+    document.getElementById(
+        "card"
+    ).innerHTML=`
+
+        ${topHTML()}
+
+        <div class="content">
+
+            <div class="emoji">
+                ${data.emoji}
+            </div>
+
+            <div class="small">
+                ${String(page+1).padStart(2,"0")}
+                &nbsp; • &nbsp;
+                SOMETHING SPECIAL
+            </div>
+
+            <h1>
+                ${data.title}
+            </h1>
+
+            <div class="text">
+                ${data.text}
+            </div>
+
+            <div class="buttons">
+
+                <button
+                    class="btn yes"
+                    onclick="nextPage()"
+                >
+                    I'M READY ❤️
+                </button>
+
+            </div>
+
+        </div>
+    `;
+
+}
+
+
+/* =====================================================
+   YES / NO
+===================================================== */
+
+function renderYesNo(data){
+
+    document.getElementById(
+        "card"
+    ).innerHTML=`
+
+        ${topHTML()}
+
+        <div class="content">
+
+            <div class="emoji">
+                ${data.emoji}
+            </div>
+
+            <div class="small">
+                HONEST ANSWER
+            </div>
+
+            <h2>
+                ${data.title}
+            </h2>
+
+            <div class="text">
+                ${data.text}
+            </div>
+
+            <div
+                class="buttons"
+                id="choiceArea"
+            >
+
+                <button
+                    class="btn yes"
+                    onclick="yesAnswer()"
+                >
+                    ${data.yes}
+                </button>
+
+                <button
+                    class="btn no"
+                    id="noButton"
+                    onclick="runAway()"
+                    onmouseenter="runAway()"
+                >
+                    ${data.no}
+                </button>
+
+            </div>
+
+            <div
+                id="reaction"
+                class="feedback"
+            ></div>
+
+        </div>
+    `;
+
+}
+
+
+/* =====================================================
+   TRUE / FALSE
+===================================================== */
+
+function renderTrueFalse(data){
+
+    document.getElementById(
+        "card"
+    ).innerHTML=`
+
+        ${topHTML()}
+
+        <div class="content">
+
+            <div class="emoji">
+                ${data.emoji}
+            </div>
+
+            <div class="small">
+                HEART TEST
+            </div>
+
+            <h2>
+                ${data.title}
+            </h2>
+
+            <div class="text">
+                ${data.text}
+            </div>
+
+            <div class="tfButtons">
+
+                <button
+                    class="trueBtn"
+                    onclick="answerTF(true)"
+                >
+                    ${data.trueText}
+                </button>
+
+                <button
+                    class="falseBtn"
+                    onclick="answerTF(false)"
+                >
+                    ${data.falseText}
+                </button>
+
+            </div>
+
+            <div
+                id="reaction"
+                class="feedback"
+            ></div>
+
+        </div>
+    `;
+
+}
+
+
+/* =====================================================
+   TOP HTML
+===================================================== */
+
+function topHTML(){
+
+    return `
+
+        <div class="top">
+
+            <div class="logo">
+                JUST FOR YOU ❤️
+            </div>
+
+            <div
+                class="counter"
+                id="counter"
+            >
+                ${String(page+1).padStart(2,"0")}
+                /
+                ${String(pages.length).padStart(2,"0")}
+            </div>
+
+        </div>
+
+        <div class="progress">
+
+            <div
+                class="progressBar"
+                id="progressBar"
+                style="
+                width:
+                ${((page+1)/pages.length*100)}%
+                "
+            ></div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   YES ANSWER
+===================================================== */
+
+function yesAnswer(){
+
+    const reaction =
+        document.getElementById(
+            "reaction"
+        );
+
+    if(reaction){
+
+        reaction.innerText =
+            "I knew it... 😌❤️";
+
+    }
+
+    setTimeout(
+        nextPage,
+        600
+    );
+
+}
+
+
+/* =====================================================
+   NEXT PAGE
+===================================================== */
+
+function nextPage(){
+
+    page++;
+
+    showPage();
+
+}
+
+
+/* =====================================================
+   RUNNING NO BUTTON
+===================================================== */
+
+function runAway(){
+
+    const button =
+        document.getElementById(
+            "noButton"
+        );
+
+    if(!button)return;
+
+    const area =
+        document.getElementById(
+            "choiceArea"
+        );
+
+    const areaRect =
+        area.getBoundingClientRect();
+
+    const maxX =
+        Math.max(
+            50,
+            areaRect.width -
+            button.offsetWidth -
+            10
+        );
+
+    const maxY =
+        100;
+
+    const x =
+        Math.random()*maxX -
+        maxX/2;
+
+    const y =
+        Math.random()*maxY -
+        maxY/2;
+
+    button.style.transform =
+        `translate(${x}px,${y}px) scale(.9)`;
+
+    const reaction =
+        document.getElementById(
+            "reaction"
+        );
+
+    if(reaction){
+
+        const messages=[
+            "Are you sure? 😏",
+            "Nope... try again 😂",
+            "That button is shy 🙈",
+            "I don't think NO wants to be clicked 😭",
+            "Maybe choose YES? ❤️",
+            "The button ran away! 🏃‍♂️💨",
+            "Nice try 😌"
+        ];
+
+        reaction.innerText =
+            messages[
+                Math.floor(
+                    Math.random()*
+                    messages.length
+                )
+            ];
+
+    }
+
+}
+
+
+/* =====================================================
+   TRUE / FALSE ANSWER
+===================================================== */
+
+function answerTF(answer){
+
+    const data =
+        pages[page];
+
+    const reaction =
+        document.getElementById(
+            "reaction"
+        );
+
+    if(answer === data.correct){
+
+        reaction.innerText =
+            "Correct! ❤️ You know the heart rules.";
+
+        setTimeout(
+            nextPage,
+            800
+        );
+
+    }else{
+
+        reaction.innerText =
+            "Hmm... think again 😏";
+
+    }
+
+}
+
+
+/* =====================================================
+   PROPOSAL
+===================================================== */
+
+function renderProposal(){
+
+    document.getElementById(
+        "card"
+    ).innerHTML=`
+
+        ${topHTML()}
+
+        <div class="content">
+
+            <div class="emoji">
+                💍
+            </div>
+
+            <div class="small">
+                THE MOMENT
+            </div>
+
+            <h1>
+                ${name}
+            </h1>
+
+            <div class="text">
+
+                Okay...
+
+                <br><br>
+
+                No more questions.
+
+                <br><br>
+
+                I've been trying to find
+                the perfect way to say this,
+                but maybe there isn't one.
+
+                <br><br>
+
+                So I'll just say it.
+
+            </div>
+
+            <div class="buttons">
+
+                <button
+                    class="btn yes"
+                    onclick="acceptProposal()"
+                >
+                    YES ❤️
+                </button>
+
+                <button
+                    class="btn no"
+                    id="noButton"
+                    onclick="runAway()"
+                    onmouseenter="runAway()"
+                >
+                    NO 🙈
+                </button>
+
+            </div>
+
+            <div
+                id="reaction"
+                class="feedback"
+            ></div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =====================================================
+   ACCEPT
+===================================================== */
+
+function acceptProposal(){
+
+    fireworks();
+
+    setTimeout(
+        finalPage,
+        500
+    );
+
+}
+
+
+/* =====================================================
+   FINAL PAGE
+===================================================== */
+
+function finalPage(){
+
+    running=false;
+
+    document.getElementById(
+        "counter"
+    ).innerText="∞ / ∞";
+
+    document.getElementById(
+        "progressBar"
+    ).style.width="100%";
+
+
+    document.getElementById(
+        "card"
+    ).innerHTML=`
+
+        <div class="content">
+
+            <div class="finalHeart">
+                💖
+            </div>
+
+            <div class="small">
+                YOU SAID YES
+            </div>
+
+            <h1>
+                It's a
+                <span class="script">
+                    YES!
+                </span>
+            </h1>
+
+            <div class="finalText">
+
+                ${name}, I honestly don't know
+                where this story will take us.
+
+                <br><br>
+
+                But I know one thing...
+
+                <br><br>
+
+                I'm really happy that
+                I got the courage to tell you.
+
+                <br><br>
+
+                Maybe this is just the beginning
+                of something beautiful.
+
+            </div>
+
+            <div class="forever">
+                You + Me = Maybe Us? ❤️
+            </div>
+
+        </div>
+
+    `;
+
+    fireworks();
+
+    fireworks();
+
+}
+
+
+/* =====================================================
+   ROMANTIC MUSIC
+===================================================== */
+
+/*
+   Original melody created with Web Audio API.
+   No copyrighted song is embedded.
+*/
+
+let audioContext=null;
+let masterGain=null;
+let musicPlaying=false;
+let musicTimer=null;
+let musicNote=0;
+
+const melody=[
+    261.63,
+    329.63,
+    392.00,
+    523.25,
+    392.00,
+    329.63,
+    293.66,
+    349.23,
+    440.00,
+    587.33,
+    440.00,
+    349.23
+];
+
+function startMusic(){
+
+    if(musicPlaying)return;
+
+    try{
+
+        audioContext =
+            new (
+                window.AudioContext ||
+                window.webkitAudioContext
+            )();
+
+        masterGain =
+            audioContext.createGain();
+
+        masterGain.gain.value=.045;
+
+        masterGain.connect(
+            audioContext.destination
+        );
+
+        musicPlaying=true;
+
+        playMusicNote();
+
+        document.getElementById(
+            "musicButton"
+        ).innerHTML =
+            "🔊 MUSIC ON";
+
+    }catch(error){
+
+        console.log(error);
+
+    }
+
+}
+
+
+function playMusicNote(){
+
+    if(!musicPlaying)return;
+
+    const oscillator =
+        audioContext.createOscillator();
+
+    const gain =
+        audioContext.createGain();
+
+    oscillator.type="sine";
+
+    oscillator.frequency.value =
+        melody[musicNote];
+
+    gain.gain.setValueAtTime(
+        .001,
+        audioContext.currentTime
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        .55,
+        audioContext.currentTime+.08
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        .001,
+        audioContext.currentTime+1.2
+    );
+
+    oscillator.connect(gain);
+    gain.connect(masterGain);
+
+    oscillator.start();
+
+    oscillator.stop(
+        audioContext.currentTime+1.3
+    );
+
+    musicNote =
+        (musicNote+1)%melody.length;
+
+    musicTimer =
+        setTimeout(
+            playMusicNote,
+            600
+        );
+
+}
+
+
+/* ================= MUSIC BUTTON ================= */
+
+document.getElementById(
+    "musicButton"
+).onclick=function(){
+
+    if(!audioContext){
+
+        startMusic();
+
+        return;
+    }
+
+    if(
+        audioContext.state ===
+        "running"
+    ){
+
+        audioContext.suspend();
+
+        this.innerHTML =
+            "🎵 MUSIC OFF";
+
+    }else{
+
+        audioContext.resume();
+
+        this.innerHTML =
+            "🔊 MUSIC ON";
+
+    }
+
+};
+
+
+/* =====================================================
+   HEARTS
+===================================================== */
+
+function createHeart(){
+
+    const heart =
+        document.createElement("div");
+
+    heart.className="heart";
+
+    const symbols=[
+        "❤️",
+        "💗",
+        "💕",
+        "💖",
+        "💘",
+        "💞",
+        "💓"
+    ];
+
+    heart.innerText =
+        symbols[
+            Math.floor(
+                Math.random()*symbols.length
+            )
+        ];
+
+    heart.style.left =
+        Math.random()*100+"vw";
+
+    heart.style.fontSize =
+        12+Math.random()*30+"px";
+
+    heart.style.animationDuration =
+        5+Math.random()*8+"s";
+
+    heart.style.setProperty(
+        "--x",
+        Math.random()*240-120+"px"
+    );
+
+    document.getElementById(
+        "hearts"
+    ).appendChild(heart);
+
+    setTimeout(
+        ()=>heart.remove(),
+        14000
+    );
+
+}
+
+setInterval(
+    createHeart,
+    450
+);
+
+
+/* =====================================================
+   PETALS
+===================================================== */
+
+function createPetal(){
+
+    const petal =
+        document.createElement("div");
+
+    petal.className="petal";
+
+    petal.innerText =
+        Math.random()>.5
+        ?"🌹"
+        :"🌸";
+
+    petal.style.left =
+        Math.random()*100+"vw";
+
+    petal.style.fontSize =
+        12+Math.random()*18+"px";
+
+    petal.style.animationDuration =
+        6+Math.random()*8+"s";
+
+    document.getElementById(
+        "petals"
+    ).appendChild(petal);
+
+    setTimeout(
+        ()=>petal.remove(),
+        16000
+    );
+
+}
+
+setInterval(
+    createPetal,
+    900
+);
+
+
+/* =====================================================
+   STARS
+===================================================== */
+
+for(let i=0;i<140;i++){
+
+    const star =
+        document.createElement("div");
+
+    star.className="star";
+
+    star.style.left =
+        Math.random()*100+"vw";
+
+    star.style.top =
+        Math.random()*100+"vh";
+
+    star.style.animationDelay =
+        Math.random()*4+"s";
+
+    document.getElementById(
+        "stars"
+    ).appendChild(star);
+
+}
+
+
+/* =====================================================
+   FIREWORKS
+===================================================== */
+
+function fireworks(){
+
+    for(let i=0;i<100;i++){
+
+        setTimeout(()=>{
+
+            const fire =
+                document.createElement("div");
+
+            fire.className="fire";
+
+            fire.style.left =
+                50+(Math.random()*10-5)+"%";
+
+            fire.style.top =
+                50+(Math.random()*10-5)+"%";
+
+            const angle =
+                Math.random()*
+                Math.PI*2;
+
+            const distance =
+                80+
+                Math.random()*400;
+
+            fire.style.setProperty(
+                "--x",
+                Math.cos(angle)*
+                distance+
+                "px"
+            );
+
+            fire.style.setProperty(
+                "--y",
+                Math.sin(angle)*
+                distance+
+                "px"
+            );
+
+            document.body.appendChild(
+                fire
+            );
+
+            setTimeout(
+                ()=>fire.remove(),
+                1600
+            );
+
+        },i*15);
+
+    }
+
+}
+
+</script>
+
 </body>
 </html>
+```
+
